@@ -1,0 +1,10 @@
+<div ng-class="{hide: !isActive()}" data-ng-swipe-right="previous()" data-ng-swipe-left="next()">
+    <div ng-transclude></div>
+    <div class="dot-container">
+        <ul class="list-horizontal">
+            <li ng-class="{highlight: ($index == current)}" ng-click="setSlider($index)" ng-repeat="dot in getDots() track by $index">
+                {{$index}}
+            </li>
+        </ul>
+    </div>
+</div>

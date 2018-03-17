@@ -1,0 +1,74 @@
+<div class="jobs">
+    <div class="container">
+        <header>
+            <h2>Header</h2>
+        </header>
+        <form novalidate class="simple-form" ng-submit="View1Ctrl.search()">
+            <div class="row">
+                <span class="col-md-3">
+                    <select class="form-control" ng-model="View1Ctrl.filter.category"
+                            ng-options="category for category in View1Ctrl.categories">
+                        <option value="">Category</option>
+                    </select>
+                </span>
+                <spam class="col-md-3">
+                    <select class="form-control" ng-model="View1Ctrl.filter.location"
+                            ng-options="location for location in View1Ctrl.locations">
+                        <option value="">Location</option>
+                    </select>
+                </spam>
+                <span class="col-md-6 form-group input-group input-group-md">
+                    <input type="text" class="form-control" ng-model="View1Ctrl.filter.text" placeholder="Type your key word">
+                    <span class="input-group-btn">
+                        <input class="btn btn-secondary btn-success" type="submit" placeholder="search">
+                    </span>
+                </span>
+            </div>
+        </form>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div>
+                    <h4>Categories <i class="fa fa-plus"></i></h4>
+                </div>
+                <div>
+                    <h4>Employment Type <i class="fa fa-plus"></i></h4>
+
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row" ng-repeat="job in View1Ctrl.jobs">
+                    <div class="col-md-2">
+                        <img ng-src="{{job.logo}}">
+                    </div>
+                    <div class="col-md-7">
+                        <h3>{{job.title}}</h3>
+                        <span><i class="fa fa-map-marker"></i>  {{job.location}}</span>
+                        <span><i class="fa fa-clock-o"></i>  {{job.employmentType}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-primary pull-right" ng-disabled="job.bookmark" ng-click="View1Ctrl.addBookmark($index)">
+                            <i class="fa fa-bookmark"></i>
+                            <span>{{job.bookmark ? 'Bookmarked' : 'Bookmark'}}</span>
+                        </button>
+                        <button type="button" class="btn btn-success pull-right">
+                            <i class="fa fa-briefcase"></i> Apply for this job
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form>
+            <div class="checkbox">
+                <label><input type="checkbox" value="">Option 1</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" value="">Option 2</label>
+            </div>
+            <div class="checkbox disabled">
+                <label><input type="checkbox" value="">Option 3</label>
+            </div>
+        </form>
+    </div>
+</div>
