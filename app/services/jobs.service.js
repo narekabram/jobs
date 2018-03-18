@@ -66,9 +66,17 @@ angular.module('myApp')
                 category: 'it',
                 employmentType: 'Full time'
             }];
-        const categories = ['it', 'design', 'movie'];
-        const employmentTypes = ['Full time', 'Part time', 'Contractor', 'Intern', 'Seasonal/temp'];
-        const locations = ['Armenia, Yerevan', 'UK, London'];
+        const categories = [
+            {name: 'it'},
+            {name: 'design'},
+            {name: 'movie'}];
+        const employmentTypes = [
+            {name: 'Full time'},
+            {name: 'Part time'},
+            {name: 'Contractor'},
+            {name: 'Intern'},
+            {name: 'Seasonal/temp'}];
+        const locations = [{name: 'Armenia, Yerevan'}, {name: 'UK, London'}];
 
         return {
 

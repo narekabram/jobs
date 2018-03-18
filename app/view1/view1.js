@@ -16,7 +16,8 @@ angular.module('myApp')
         vm.filter = {
             location: null,
             category: null,
-            text: null
+            text: null,
+            employmentType: null
         };
 
 
@@ -25,21 +26,21 @@ angular.module('myApp')
         vm.locations = Data.getLocations();
         vm.jobs = Data.getJobs();
 
-        vm.data = [{
-            name: 'Hayk',
-            age: 24
-        }, {
-            name: 'Souren',
-            age: 26
-        }];
-
         vm.addBookmark = function (index) {
-            console.log(index);
             Data.addBookmark(vm.jobs[index].id);
         };
 
         vm.search = function () {
+            console.log(vm.filter);
             vm.jobs = Data.getJobs(vm.filter);
             Data.filtered = [];
+        };
+
+        vm.filterJobs = function (obj, type) {
+            if (obj.isChecked) {
+                vm.filter[type] = obj.name;
+                console.log(vm.filter);
+                vm.search();
+            }
         }
     });
