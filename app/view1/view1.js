@@ -34,10 +34,12 @@ angular.module('myApp')
         }];
 
         vm.addBookmark = function (index) {
-            Data.addBookmark(index);
-        }
+            console.log(index);
+            Data.addBookmark(vm.jobs[index].id);
+        };
 
         vm.search = function () {
-            Data.getJobs(vm.filter);
+            vm.jobs = Data.getJobs(vm.filter);
+            Data.filtered = [];
         }
     });

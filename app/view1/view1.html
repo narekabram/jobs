@@ -7,13 +7,13 @@
             <div class="row">
                 <span class="col-md-3">
                     <select class="form-control" ng-model="View1Ctrl.filter.category"
-                            ng-options="category for category in View1Ctrl.categories">
+                            ng-options="category for category in View1Ctrl.categories track by category">
                         <option value="">Category</option>
                     </select>
                 </span>
                 <spam class="col-md-3">
                     <select class="form-control" ng-model="View1Ctrl.filter.location"
-                            ng-options="location for location in View1Ctrl.locations">
+                            ng-options="location for location in View1Ctrl.locations track by location">
                         <option value="">Location</option>
                     </select>
                 </spam>
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="row" ng-repeat="job in View1Ctrl.jobs">
+                <div class="row" ng-repeat="job in View1Ctrl.jobs track by $index">
                     <div class="col-md-2">
                         <img ng-src="{{job.logo}}">
                     </div>

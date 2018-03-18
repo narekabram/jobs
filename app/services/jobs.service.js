@@ -4,6 +4,7 @@ angular.module('myApp')
     .factory('Data', function () {
         const jobs = [
             {
+                id: '1',
                 logo: './assets/image/Webp.net-resizeimage.jpg',
                 location: 'Armenia, Yerevan',
                 title: 'Software Engineer',
@@ -12,6 +13,7 @@ angular.module('myApp')
                 employmentType: 'Full time'
             },
             {
+                id: '2',
                 logo: './assets/image/Webp.net-resizeimage.png',
                 location: 'UK, London',
                 title: 'QA Tester',
@@ -20,6 +22,7 @@ angular.module('myApp')
                 employmentType: 'Part time'
             },
             {
+                id: '3',
                 logo: './assets/image/Webp.net-resizeimage.jpg',
                 location: 'UK, London',
                 title: 'UI/UX designer',
@@ -28,6 +31,7 @@ angular.module('myApp')
                 employmentType: 'Full time'
             },
             {
+                id: '4',
                 logo: './assets/image/Webp.net-resizeimage.png',
                 location: 'Armenia, Yerevan',
                 title: 'operator',
@@ -36,6 +40,7 @@ angular.module('myApp')
                 employmentType: 'Part time'
             },
             {
+                id: '4',
                 logo: './assets/image/Webp.net-resizeimage.png',
                 location: 'UK, London',
                 title: 'Web Developer',
@@ -44,13 +49,16 @@ angular.module('myApp')
                 employmentType: 'Full time'
             },
             {
+                id: '5',
                 logo: './assets/image/Webp.net-resizeimage.png',
                 location: 'Armenia, Yerevan',
                 title: 'Web designer',
                 bookmark: false,
                 category: 'design',
                 employmentType: 'Intern'
-            }, {
+            },
+            {
+                id: '6',
                 logo: './assets/image/Webp.net-resizeimage.png',
                 location: 'Armenia, Yerevan',
                 title: 'Software Engineer',
@@ -63,17 +71,75 @@ angular.module('myApp')
         const locations = ['Armenia, Yerevan', 'UK, London'];
 
         return {
+
+            filtered: [],
+
             getJobs: function (filter) {
-                let filtered = [];
                 if (filter) {
-                    jobs.forEach((obj) => {
-                        if (filter.category && filter.categories) {
-                            filtered.push(obj);
-                        }
-                    });
+                    if (filter.text) {
+                        this.filterByText(jobs, filter);
+                    }
+
+                    if (filter.employmentType) {
+                        this.filtered.length ? this.filterByEmploymentType(this.filtered, filter) : this.filterByEmploymentType(jobs, filter);
+                    }
+
+                    if (filter.location) {
+                        this.filtered.length ? this.filterByLocation(this.filtered, filter) : this.filterByLocation(jobs, filter);
+                    }
+
+                    if (filter.category) {
+                        this.filtered.length ? this.filterByCategory(this.filtered, filter) : this.filterByCategory(jobs, filter)
+                    }
+
+                    return this.filtered;
                 }
 
                 return jobs;
+            },
+
+            filterByLocation: function (jobsArr, filter) {
+                this.filtered = [];
+                jobsArr.forEach((obj) => {
+                    if (filter.location === obj.location) {
+                        this.filtered.push(obj);
+                    }
+                });
+
+                return this.filtered;
+            },
+
+            filterByText: function (jobsArr, filter) {
+                this.filtered = [];
+                jobsArr.forEach((obj) => {
+                    if (obj.title.match(filter.text)) {
+                        this.filtered.push(obj);
+                    }
+                });
+
+                return this.filtered;
+            },
+
+            filterByCategory: function (jobsArr, filter) {
+                this.filtered = [];
+                jobsArr.forEach((obj) => {
+                    if (filter.category === obj.category) {
+                        this.filtered.push(obj);
+                    }
+                });
+
+                return this.filtered;
+            },
+
+            filterByEmploymentType: function (jobsArr, filter) {
+                this.filtered = [];
+                jobsArr.forEach((obj) => {
+                    if (filter.employmentType === obj.employmentType) {
+                        this.filtered.push(obj);
+                    }
+                });
+
+                return this.filtered;
             },
 
             getCategories: function() {
@@ -88,8 +154,14 @@ angular.module('myApp')
                 return employmentTypes;
             },
 
-            addBookmark: function (index) {
-                return jobs[index].bookmark = true;
+            addBookmark: function (id) {
+                jobs.forEach((obj) => {
+                    if (obj.id === id) {
+                        obj.bookmark = true;
+                    }
+                });
+
+                return;
             }
         };
     });
