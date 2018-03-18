@@ -1,11 +1,53 @@
+.head-text {
+    color: white;
+}
+
 .jobs {
-    /*background-color: #000080;*/
+    background-image: url('../assets/image/job.jpg');
+    background-size: cover;
+    min-height: 100vh;
 }
 
 .main-jobs {
     border: solid 1px rgba(216,216,216,0.3);
-    margin-bottom: 20px;
+    margin: 10px 20px 20px 20px;
     min-height: 100px;
+}
+
+.points {
+    background-color: white;
+}
+
+.points ul {
+    padding-bottom: 15px;
+}
+
+.points h4 {
+    cursor: pointer;
+}
+
+.jobs-card {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.category {
+    padding-right: 0;
+}
+
+.form-control {
+    border-radius: 0;
+}
+
+.location {
+    padding: 0;
+}
+
+.search-bar {
+    margin: 20px 0 40px 16px;
+    padding: 15px 45px 1px 25px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
 }
 
 img {
@@ -17,10 +59,26 @@ img {
 
 .loc-time {
     margin: 0 20px 0 0;
+    color: #777777;
 }
 
 .jobs-result span {
     font-size: 16px;
+    margin: 10px 20px 20px 20px;
+}
+
+.no-result {
+    min-height: 200px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.no-result h4 {
+    margin-top: 40px;
+}
+
+.jobs-result p {
+    display: inline;
 }
 
 .jobs-buttons button {
@@ -47,4 +105,13 @@ img {
 .sidebar-header ul {
     list-style-type: none;
     padding-left: 20px;
+}
+
+.change-color {
+    min-height: 100px;
+    padding: 0;
+}
+
+.colors {
+    height: 25px;
 }

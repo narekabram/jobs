@@ -40,7 +40,7 @@ angular.module('myApp')
                 employmentType: 'Part time'
             },
             {
-                id: '4',
+                id: '5',
                 logo: './assets/image/Webp.net-resizeimage.png',
                 location: 'UK, London',
                 title: 'Web Developer',
@@ -49,7 +49,7 @@ angular.module('myApp')
                 employmentType: 'Full time'
             },
             {
-                id: '5',
+                id: '6',
                 logo: './assets/image/Webp.net-resizeimage.png',
                 location: 'Armenia, Yerevan',
                 title: 'Web designer',
@@ -58,7 +58,7 @@ angular.module('myApp')
                 employmentType: 'Intern'
             },
             {
-                id: '6',
+                id: '7',
                 logo: './assets/image/Webp.net-resizeimage.png',
                 location: 'Armenia, Yerevan',
                 title: 'Software Engineer',
@@ -77,89 +77,101 @@ angular.module('myApp')
             {name: 'Intern'},
             {name: 'Seasonal/temp'}];
         const locations = [{name: 'Armenia, Yerevan'}, {name: 'UK, London'}];
+        const colors = [
+            {
+                name: 'green',
+                hover: '#4cae4c',
+                color: '#32CD32'
+            },
+            {
+                name: 'orange',
+                color: '#FFA500',
+                hover: '#FF8C00'
+            },
+            {
+                name: 'purple',
+                color: '#9400D3',
+                hover: '#8B008B'
+            },
+            {
+                name: 'blue',
+                color: '#0000CD',
+                hover: '#191970'
+            }
+        ];
+        // let currentColor = colors[0];
 
         return {
 
             filtered: [],
 
-            getJobs: function (filter) {
-                if (filter) {
-                    if (filter.text) {
-                        this.filterByText(jobs, filter);
-                    }
+            currentColor: colors[0],
 
-                    if (filter.employmentType) {
-                        this.filtered.length ? this.filterByEmploymentType(this.filtered, filter) : this.filterByEmploymentType(jobs, filter);
-                    }
+            getColors: function () {
+                return colors;
+            },
 
-                    if (filter.location) {
-                        this.filtered.length ? this.filterByLocation(this.filtered, filter) : this.filterByLocation(jobs, filter);
-                    }
+            changeColor: function (color) {
+                return this.currentColor = color;
+            },
 
-                    if (filter.category) {
-                        this.filtered.length ? this.filterByCategory(this.filtered, filter) : this.filterByCategory(jobs, filter)
+            filterAuth: function (filterObj) {
+                for (var i = 0; i < Object.keys(filterObj).length; i++) {
+                    if (filterObj[Object.keys(filterObj)[i]] && filterObj[Object.keys(filterObj)[i]].name) {
+                        return true;
                     }
+                }
+                return false
+            },
 
-                    return this.filtered;
+            filter: function (fiObj) {
+                this.filtered = jobs.slice();
+
+                if (!fiObj) {
+                    return this.calculateData(jobs);
                 }
 
-                return jobs;
+                if (this.filterAuth(fiObj)) {
+                    Object.keys(fiObj).forEach((filterType) => {
+                        if (fiObj[filterType] && fiObj[filterType].name) {
+                            this.filtered = this.filtered.filter(function (job) {
+                                console.log(job);
+                                console.log(filterType);
+                                if (typeof fiObj[filterType].name === 'string') {
+                                    if ((job[filterType].includes(fiObj[filterType].name))) {
+                                        return job;
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                    // return this.filtered;
+                    return this.calculateData(this.filtered);
+                }
+
+                return this.calculateData(jobs);
+                // return jobs;
             },
 
-            filterByLocation: function (jobsArr, filter) {
-                this.filtered = [];
-                jobsArr.forEach((obj) => {
-                    if (filter.location === obj.location) {
-                        this.filtered.push(obj);
-                    }
-                });
-
-                return this.filtered;
-            },
-
-            filterByText: function (jobsArr, filter) {
-                this.filtered = [];
-                jobsArr.forEach((obj) => {
-                    if (obj.title.match(filter.text)) {
-                        this.filtered.push(obj);
-                    }
-                });
-
-                return this.filtered;
-            },
-
-            filterByCategory: function (jobsArr, filter) {
-                this.filtered = [];
-                jobsArr.forEach((obj) => {
-                    if (filter.category === obj.category) {
-                        this.filtered.push(obj);
-                    }
-                });
-
-                return this.filtered;
-            },
-
-            filterByEmploymentType: function (jobsArr, filter) {
-                this.filtered = [];
-                jobsArr.forEach((obj) => {
-                    if (filter.employmentType === obj.employmentType) {
-                        this.filtered.push(obj);
-                    }
-                });
-
-                return this.filtered;
-            },
-
-            getCategories: function() {
+            getCategories: function () {
                 return categories;
             },
 
-            getLocations: function() {
+            getLocations: function () {
                 return locations;
             },
 
-            getEmplTypes: function() {
+            getEmplTypes: function () {
                 return employmentTypes;
+            },
+
+            calculateData: function (jobs) {
+                if (jobs.length > 5) {
+                    return {data: jobs.slice(0,5), total: jobs.length};
+                } else {
+                    return {data: jobs, total: jobs.length};
+                }
             },
 
             addBookmark: function (id) {

@@ -1,32 +1,45 @@
 <div class="jobs">
     <header>
         <div class="container">
-            <h2>Header</h2>
+            <h2 class="head-text">Our Vacancies</h2>
         </div>
         <span class="settings">
-            <i class="fa fa-cog  fa-2x" aria-hidden="true"></i>
+            <i data-toggle="collapse" data-target="#colors" aria-expanded="false" class="fa fa-cog  fa-2x" aria-hidden="true"></i>
+            <div class="change-color collapse multi-collapse" id="colors">
+                <span>SITE STYLE</span>
+                <div class="colors" ng-repeat="color in View1Ctrl.colors track by $index"
+                     ng-style="{'background-color': color.color}"
+                     ng-click="View1Ctrl.chooseColor(color)"></div>
+            </div>
         </span>
     </header>
     <div class="container">
         <form novalidate class="simple-form" ng-submit="View1Ctrl.search()">
-            <div class="search">
-                <span class="col-md-3">
-                    <select class="form-control" ng-model="View1Ctrl.filter.category"
-                            ng-options="category.name for category in View1Ctrl.categories track by category.name">
-                        <option value="">Category</option>
+            <div class="search-bar">
+                <span class="category col-md-3">
+                    <select class="form-control" ng-model="View1Ctrl.filter.category.name">
+                        <option value="" selected>Category</option>
+                        <option ng-repeat="category in View1Ctrl.categories track by category.name"
+                                value="{{category.name}}"
+                                ng-selected="category.name === View1Ctrl.filter.category.name">{{category.name}}</option>
                     </select>
                 </span>
-                <spam class="col-md-3">
-                    <select class="form-control" ng-model="View1Ctrl.filter.location"
-                            ng-options="location.name for location in View1Ctrl.locations track by location.name">
-                        <option value="">Location</option>
+                <span class="location col-md-3">
+                    <select class="form-control" ng-model="View1Ctrl.filter.location.name">
+                        <option value="" selected>Location</option>
+                        <option ng-repeat="location in View1Ctrl.locations track by location.name"
+                                value="{{location.name}}"
+                                ng-selected="location.name === View1Ctrl.filter.location.name">{{location.name}}</option>
                     </select>
-                </spam>
-                <span class="col-md-6 form-group input-group input-group-md">
-                    <input type="text" class="form-control" ng-model="View1Ctrl.filter.text"
+                </span>
+                <span class="col-md-6 form-group input-group input-group-md search">
+                    <input type="text" class="form-control" ng-model="View1Ctrl.filter.title.name"
                            placeholder="Type your key word">
                     <span class="input-group-btn">
-                        <input class="btn btn-secondary btn-success" type="submit" placeholder="search">
+                        <button ng-mouseover="hover=true"
+                                ng-mouseleave="hover=false"
+                                ng-style="{'background-color': hover ? View1Ctrl.currentColor.hover : View1Ctrl.currentColor.color, 'color': 'white'}"
+                                class="btn btn-secondary" type="submit">Search</button>
                     </span>
                 </span>
             </div>
@@ -36,36 +49,50 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="sidebar-header">
-                    <h4>Categories <i class="fa fa-plus pull-right"></i></h4>
-                        <ul class="checkbox">
+                    <div class="points">
+                        <h4 data-toggle="collapse" data-target="#categoty" aria-expanded="false">Categories
+                            <i class="fa fa-plus pull-right"></i></h4>
+                        <ul class="checkbox collapse multi-collapse" id="categoty">
                             <li ng-repeat="category in View1Ctrl.categories track by $index">
-                                <label><input type="checkbox" ng-model="category.isChecked" value=""
+                                <label><input type="checkbox"
+                                              ng-model="category.isChecked"
+                                              ng-checked="category.name === View1Ctrl.filter.category.name ? true : false"
                                               ng-change="View1Ctrl.filterJobs(category, 'category')" value="">{{category.name}}</label>
                             </li>
                         </ul>
+                    </div>
                 </div>
                 <div class="sidebar-header">
-                    <h4>Employment Type <i class="fa fa-minus pull-right"></i></h4>
-                    <ul class="checkbox">
-                        <li ng-repeat="emplTypes in View1Ctrl.emplTypes track by $index">
-                            <label><input type="checkbox"
-                                          ng-model="emplTypes.isChecked" value=""
-                                          ng-change="View1Ctrl.filterJobs(emplTypes, 'employmentType')">{{emplTypes.name}}</label>
-                        </li>
-                    </ul>
+                    <div class="points">
+                        <h4 data-toggle="collapse" data-target="#emplTypes" aria-expanded="false">Employment Type <i class="fa fa-minus pull-right"></i></h4>
+                        <ul class="checkbox collapse multi-collapse" id="emplTypes">
+                            <li ng-repeat="emplTypes in View1Ctrl.emplTypes track by $index">
+                                <label><input type="checkbox"
+                                              ng-model="emplTypes.isChecked" value=""
+                                              ng-checked="emplTypes.name === View1Ctrl.filter.emplTypes.name ? true : false"
+                                              ng-change="View1Ctrl.filterJobs(emplTypes, 'employmentType')" value="">{{emplTypes.name}}</label>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="sidebar-header">
-                    <h4>Location <i class="fa fa-minus pull-right"></i></h4>
-                    <ul class="checkbox">
-                        <li ng-repeat="location in View1Ctrl.locations track by $index">
-                            <label><input type="checkbox" ng-model="location.isChecked" value="" ng-change="View1Ctrl.filterJobs(location, 'location')" value="">{{location.name}}</label>
-                        </li>
-                    </ul>
+                    <div class="points">
+                        <h4 data-toggle="collapse" data-target="#location" aria-expanded="false">Location <i class="fa fa-minus pull-right"></i></h4>
+                        <ul class="checkbox collapse multi-collapse" id="location">
+                            <li ng-repeat="location in View1Ctrl.locations track by $index">
+                                <label><input type="checkbox"
+                                              ng-model="location.isChecked" value=""
+                                              ng-checked="location.name === View1Ctrl.filter.location.name ? true : false"
+                                              ng-change="View1Ctrl.filterJobs(location, 'location')" value="">{{location.name}}</label>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-9">
-                <div class="jobs-result">
-                    <span>Showing 5 of 7 offers</span>
+            <div class="jobs-card col-md-9" ng-if="View1Ctrl.jobs.length">
+                <div class="jobs-result row">
+                    <div class="col-lg-6"><span>Showing {{View1Ctrl.jobs.length}} of {{View1Ctrl.total}} offers</span></div>
+                    <div class="col-lg-6"><span class="pull-right">Sort by: <p>Most Relevant</p></span></div>
                 </div>
                 <div class="main-jobs row" ng-repeat="job in View1Ctrl.jobs track by $index">
                     <div class="col-md-2">
@@ -82,11 +109,17 @@
                             <i class="fa fa-bookmark"></i>
                             <span>{{job.bookmark ? 'Bookmarked' : 'Bookmark'}}</span>
                         </button>
-                        <button type="button" class="btn btn-success pull-right">
+                        <button type="button" ng-mouseover="hoverActive=true"
+                                ng-mouseleave="hoverActive=false"
+                                ng-style="{'background-color': hoverActive ? View1Ctrl.currentColor.hover : View1Ctrl.currentColor.color, 'border-color': View1Ctrl.currentColor.color}"
+                                class="btn btn-success pull-right">
                             <i class="fa fa-briefcase"></i> Apply for this job
                         </button>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-9 no-result" ng-if="!View1Ctrl.jobs.length">
+                <h4 class="text-center">No result</h4>
             </div>
         </div>
     </div>

@@ -14,17 +14,31 @@ angular.module('myApp')
     .controller('View1Controller', function (Data) {
         var vm = this;
         vm.filter = {
-            location: null,
-            category: null,
-            text: null,
-            employmentType: null
+            location: {
+                name: null
+            },
+            category: {
+                name: null
+            },
+            title: {
+                name: null
+            },
+            employmentType: {
+                name: null
+            }
         };
 
-
+        vm.colors = Data.getColors();
         vm.categories = Data.getCategories();
         vm.emplTypes = Data.getEmplTypes();
         vm.locations = Data.getLocations();
-        vm.jobs = Data.getJobs();
+        vm.jobs = Data.filter().data;
+        vm.total = Data.filter().total;
+        vm.currentColor = Data.currentColor;
+
+        vm.chooseColor = function(color) {
+            vm.currentColor = Data.changeColor(color);
+        };
 
         vm.addBookmark = function (index) {
             Data.addBookmark(vm.jobs[index].id);
@@ -32,14 +46,14 @@ angular.module('myApp')
 
         vm.search = function () {
             console.log(vm.filter);
-            vm.jobs = Data.getJobs(vm.filter);
+            vm.jobs = Data.filter(vm.filter).data;
+            vm.total = Data.filter(vm.filter).total;
             Data.filtered = [];
         };
 
         vm.filterJobs = function (obj, type) {
             if (obj.isChecked) {
-                vm.filter[type] = obj.name;
-                console.log(vm.filter);
+                vm.filter[type] = obj;
                 vm.search();
             }
         }
