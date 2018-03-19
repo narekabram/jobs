@@ -2,15 +2,16 @@
     color: white;
 }
 
-.jobs {
+body {
     background-image: url('../assets/image/job.jpg');
     background-size: cover;
-    min-height: 100vh;
+    max-height: 100vh;
+    background-attachment: fixed;
 }
 
 .main-jobs {
     border: solid 1px rgba(216,216,216,0.3);
-    margin: 10px 20px 20px 20px;
+    margin: 20px 0;
     min-height: 100px;
 }
 
@@ -26,9 +27,11 @@
     cursor: pointer;
 }
 
-.jobs-card {
+.jobs-card > div{
     background-color: white;
     border-radius: 5px;
+    padding: 25px;
+    margin-bottom: 50px;
 }
 
 .category {
@@ -44,14 +47,19 @@
 }
 
 .search-bar {
-    margin: 20px 0 40px 16px;
-    padding: 15px 45px 1px 25px;
+    margin: 20px 0 40px 0;
+    padding: 15px 15px 1px;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 5px;
 }
 
+.image-container {
+    display: flex;
+    align-items: center;
+    min-height:100px;
+}
+
 img {
-    margin: 5px;
     max-height: 80px;
     max-width: 80px;
     border: solid 1px rgba(216,216,216,0.3);
@@ -63,8 +71,7 @@ img {
 }
 
 .jobs-result span {
-    font-size: 16px;
-    margin: 10px 20px 20px 20px;
+    font-size: 14px;
 }
 
 .no-result {
@@ -79,6 +86,8 @@ img {
 
 .jobs-result p {
     display: inline;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .jobs-buttons button {
@@ -112,6 +121,45 @@ img {
     padding: 0;
 }
 
+.change-color span {
+    margin-bottom: 6px;
+    display: inline-block;
+}
+
+#colors {
+    width: 100px;
+    position: absolute;
+    right: 34px;
+    top: 0;
+    background: #d8d8d8;
+    z-index: 1;
+    text-align: center;
+    padding: 10px;
+}
+
 .colors {
     height: 25px;
+    width: 50%;
+    display: inline-block;
+}
+
+.row.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+.row.no-gutters > [class^="col-"],
+.row.no-gutters > [class*=" col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+@media (max-width: 576px) {
+    .jobs-result .relevant, .jobs-result span {
+        float: none!important;
+    }
+}
+@media (max-width: 991px) {
+    .jobs-buttons .pull-right {
+        float: none!important;
+    }
 }

@@ -4,8 +4,8 @@
             <h2 class="head-text">Vacancies</h2>
         </div>
         <span class="settings">
-            <i data-toggle="collapse" data-target="#colors" aria-expanded="false" class="fa fa-cog  fa-2x" aria-hidden="true"></i>
-            <div class="change-color collapse multi-collapse" id="colors">
+            <i class="fa fa-cog  fa-2x" aria-hidden="true" ng-click="View1Ctrl.showColor = !View1Ctrl.showColor"></i>
+            <div ng-if="View1Ctrl.showColor" class="change-color" id="colors">
                 <span>SITE STYLE</span>
                 <div class="colors" ng-repeat="color in View1Ctrl.colors track by $index"
                      ng-style="{'background-color': color.color}"
@@ -15,7 +15,7 @@
     </header>
     <div class="container">
         <form novalidate class="simple-form" ng-submit="View1Ctrl.search()">
-            <div class="search-bar">
+            <div class="search-bar row no-gutters">
                 <span class="category col-md-3">
                     <select class="form-control" ng-model="View1Ctrl.filter.category.name[0].name">
                         <option value="" selected>Category</option>
@@ -90,31 +90,33 @@
                 </div>
             </div>
             <div class="jobs-card col-md-9" ng-if="View1Ctrl.jobs.length">
-                <div class="jobs-result row">
-                    <div class="col-lg-6"><span>Showing {{View1Ctrl.jobs.length}} of {{View1Ctrl.total}} offers</span></div>
-                    <div class="col-lg-6"><span class="pull-right">Sort by: <p>Most Relevant</p></span></div>
-                </div>
-                <div class="main-jobs row" ng-repeat="job in View1Ctrl.jobs track by $index">
-                    <div class="col-md-2">
-                        <img ng-src="{{job.logo}}">
+                <div>
+                    <div class="jobs-result row">
+                        <div class="col-lg-6 relevant pull-left"><span>Showing {{View1Ctrl.jobs.length}} of {{View1Ctrl.total}} offers</span></div>
+                        <div class="col-lg-6 relevant pull-right"><span class="pull-right">Sort by: <p>Most Relevant</p></span></div>
                     </div>
-                    <div class="col-md-7">
-                        <h3>{{job.title}}</h3>
-                        <span class="loc-time"><i class="fa fa-map-marker"></i>  {{job.location}}</span>
-                        <span class="loc-time"><i class="fa fa-clock-o"></i>  {{job.employmentType}}</span>
-                    </div>
-                    <div class="jobs-buttons col-md-3">
-                        <button type="button" class="btn btn-primary pull-right" ng-disabled="job.bookmark"
-                                ng-click="View1Ctrl.addBookmark($index)">
-                            <i class="fa fa-bookmark"></i>
-                            <span>{{job.bookmark ? 'Bookmarked' : 'Bookmark'}}</span>
-                        </button>
-                        <button type="button" ng-mouseover="hoverActive=true"
-                                ng-mouseleave="hoverActive=false"
-                                ng-style="{'background-color': hoverActive ? View1Ctrl.currentColor.hover : View1Ctrl.currentColor.color, 'border-color': View1Ctrl.currentColor.color}"
-                                class="btn btn-success pull-right">
-                            <i class="fa fa-briefcase"></i> Apply for this job
-                        </button>
+                    <div class="main-jobs row" ng-repeat="job in View1Ctrl.jobs track by $index">
+                        <div class="col-md-2 image-container">
+                            <img ng-src="{{job.logo}}">
+                        </div>
+                        <div class="col-md-7">
+                            <h3>{{job.title}}</h3>
+                            <span class="loc-time"><i class="fa fa-map-marker"></i>  {{job.location}}</span>
+                            <span class="loc-time"><i class="fa fa-clock-o"></i>  {{job.employmentType}}</span>
+                        </div>
+                        <div class="jobs-buttons col-md-3">
+                            <button type="button" class="btn btn-primary pull-right" ng-disabled="job.bookmark"
+                                    ng-click="View1Ctrl.addBookmark($index)">
+                                <i class="fa fa-bookmark"></i>
+                                <span>{{job.bookmark ? 'Bookmarked' : 'Bookmark'}}</span>
+                            </button>
+                            <button type="button" ng-mouseover="hoverActive=true"
+                                    ng-mouseleave="hoverActive=false"
+                                    ng-style="{'background-color': hoverActive ? View1Ctrl.currentColor.hover : View1Ctrl.currentColor.color, 'border-color': View1Ctrl.currentColor.color}"
+                                    class="btn btn-success pull-right">
+                                <i class="fa fa-briefcase"></i> Apply for this job
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

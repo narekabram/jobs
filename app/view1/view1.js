@@ -35,8 +35,10 @@ angular.module('myApp')
         vm.jobs = Data.filter().data;
         vm.total = Data.filter().total;
         vm.currentColor = Data.currentColor;
+        vm.showColor = false;
 
         vm.chooseColor = function(color) {
+            vm.showColor = false;
             vm.currentColor = Data.changeColor(color);
         };
 
