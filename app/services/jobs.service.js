@@ -2,13 +2,16 @@
 
 angular.module('myApp')
     .factory('Data', function () {
+
+        // here is mock data
+
         const jobs = [
             {
                 id: '1',
                 logo: './assets/image/Webp.net-resizeimage.jpg',
                 location: 'Armenia, Yerevan',
                 title: 'Software Engineer',
-                bookmark: true,
+                bookmark: false,
                 category: 'it',
                 employmentType: 'Full time'
             },
@@ -99,7 +102,6 @@ angular.module('myApp')
                 hover: '#191970'
             }
         ];
-        // let currentColor = colors[0];
 
         return {
 
@@ -139,7 +141,7 @@ angular.module('myApp')
                             filtered = filtered.filter(function (job) {
                                 if (fiObj[filterType].name.constructor.name === 'Array') {
                                     typesArr = fiObj[filterType].name.filter(function (obj) {
-                                        if ((job[filterType].includes(obj.name))) {
+                                        if ((job[filterType].toUpperCase().includes(obj.name.toUpperCase()))) {
                                             return job;
                                         }
                                     });
@@ -177,6 +179,7 @@ angular.module('myApp')
             },
 
             calculateData: function (jobs) {
+                // in real site here we must have pagination logic
                 if (jobs.length > 5) {
                     return {data: jobs.slice(0, 5), total: jobs.length};
                 } else {

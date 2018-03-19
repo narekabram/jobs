@@ -1,6 +1,7 @@
 <div class="jobs">
     <header>
-        <div class="container">
+        <div class="container head">
+            <span class="url-info"><p ng-href="/">Home </p><i class="fa fa-chevron-right" aria-hidden="true"></i> {{View1Ctrl.currentUrl}} </span>
             <h2 class="head-text">Vacancies</h2>
         </div>
         <span class="settings">
@@ -47,11 +48,13 @@
         <div class="clearfix"></div>
 
         <div class="row">
-            <div class="col-md-3">
+            <div class="filter-multiple col-md-3">
                 <div class="sidebar-header">
                     <div class="points">
-                        <h4 data-toggle="collapse" data-target="#categoty" aria-expanded="false">Categories
-                            <i class="fa fa-plus pull-right"></i></h4>
+                        <h4 ng-click="showCategory = !showCategory" data-toggle="collapse" data-target="#categoty" aria-expanded="false">Categories
+                            <i ng-if="!showCategory" class="fa fa-plus pull-right"></i>
+                            <i ng-if="showCategory" class="fa fa-minus pull-right"></i>
+                        </h4>
                         <ul class="checkbox collapse multi-collapse" id="categoty">
                             <li ng-repeat="category in View1Ctrl.categories track by $index">
                                 <label><input type="checkbox"
@@ -64,7 +67,10 @@
                 </div>
                 <div class="sidebar-header">
                     <div class="points">
-                        <h4 data-toggle="collapse" data-target="#emplTypes" aria-expanded="false">Employment Type <i class="fa fa-minus pull-right"></i></h4>
+                        <h4 ng-click="showEmpl = !showEmpl" data-toggle="collapse" data-target="#emplTypes" aria-expanded="false">Employment Type
+                            <i ng-if="!showEmpl" class="fa fa-plus pull-right"></i>
+                            <i ng-if="showEmpl" class="fa fa-minus pull-right"></i>
+                        </h4>
                         <ul class="checkbox collapse multi-collapse" id="emplTypes">
                             <li ng-repeat="emplTypes in View1Ctrl.emplTypes track by $index">
                                 <label><input type="checkbox"
@@ -77,7 +83,10 @@
                 </div>
                 <div class="sidebar-header">
                     <div class="points">
-                        <h4 data-toggle="collapse" data-target="#location" aria-expanded="false">Location <i class="fa fa-minus pull-right"></i></h4>
+                        <h4 ng-click="showLocation = !showLocation" data-toggle="collapse" data-target="#location" aria-expanded="false">Location
+                            <i ng-if="!showLocation" class="fa fa-plus pull-right"></i>
+                            <i ng-if="showLocation" class="fa fa-minus pull-right"></i>
+                        </h4>
                         <ul class="checkbox collapse multi-collapse" id="location">
                             <li ng-repeat="location in View1Ctrl.locations track by $index">
                                 <label><input type="checkbox"
@@ -93,7 +102,9 @@
                 <div>
                     <div class="jobs-result row">
                         <div class="col-lg-6 relevant pull-left"><span>Showing {{View1Ctrl.jobs.length}} of {{View1Ctrl.total}} offers</span></div>
-                        <div class="col-lg-6 relevant pull-right"><span class="pull-right">Sort by: <p>Most Relevant</p></span></div>
+
+                        <!–– no logic for this part ––>
+                        <div title="no logic for this side" class="col-lg-6 relevant pull-right"><span class="pull-right">Sort by: <p>Most Relevant</p></span></div>
                     </div>
                     <div class="main-jobs row" ng-repeat="job in View1Ctrl.jobs track by $index">
                         <div class="col-md-2 image-container">
@@ -110,7 +121,9 @@
                                 <i class="fa fa-bookmark"></i>
                                 <span>{{job.bookmark ? 'Bookmarked' : 'Bookmark'}}</span>
                             </button>
-                            <button type="button" ng-mouseover="hoverActive=true"
+
+                            <!–– no logic for this button ––>
+                            <button title="no logic for this button" type="button" ng-mouseover="hoverActive=true"
                                     ng-mouseleave="hoverActive=false"
                                     ng-style="{'background-color': hoverActive ? View1Ctrl.currentColor.hover : View1Ctrl.currentColor.color, 'border-color': View1Ctrl.currentColor.color}"
                                     class="btn btn-success pull-right">

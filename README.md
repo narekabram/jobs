@@ -15,7 +15,7 @@ To get you started you can simply clone the `angular-seed` repository and instal
 
 ### Prerequisites
 
-You need git to clone the `angular-seed` repository. You can get git from [here][git].
+You need git to clone the `jobs` repository. You can get git from [here][git].
 
 We also use a number of Node.js tools to initialize and test `angular-seed`. You must have Node.js
 and its package manager (npm) installed. You can get them from [here][node].
@@ -25,17 +25,9 @@ and its package manager (npm) installed. You can get them from [here][node].
 Clone the `angular-seed` repository using git:
 
 ```
-git clone https://github.com/angular/angular-seed.git
-cd angular-seed
+git clone https://github.com/narekabram/jobs.git
+cd jobs
 ```
-
-If you just want to start a new project without the `angular-seed` commit history then you can do:
-
-```
-git clone --depth=1 https://github.com/angular/angular-seed.git <your-project-name>
-```
-
-The `depth=1` tells git to only pull down one commit worth of historical data.
 
 ### Install Dependencies
 

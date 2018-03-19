@@ -3,7 +3,7 @@
 angular.module('myApp')
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/view1', {
+        $routeProvider.when('/jobs', {
             templateUrl: 'view1/view1.html',
             controller: 'View1Controller',
             controllerAs: 'View1Ctrl',
@@ -11,7 +11,7 @@ angular.module('myApp')
         });
     }])
 
-    .controller('View1Controller', function (Data) {
+    .controller('View1Controller', function (Data, $location) {
         var vm = this;
         vm.filter = {
             location: {
@@ -36,6 +36,7 @@ angular.module('myApp')
         vm.total = Data.filter().total;
         vm.currentColor = Data.currentColor;
         vm.showColor = false;
+        vm.currentUrl = $location.$$url.substring(1);
 
         vm.chooseColor = function(color) {
             vm.showColor = false;

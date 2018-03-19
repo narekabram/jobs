@@ -1,12 +1,27 @@
-.head-text {
-    color: white;
-}
-
 body {
     background-image: url('../assets/image/job.jpg');
     background-size: cover;
     max-height: 100vh;
     background-attachment: fixed;
+}
+
+.head {
+    margin-top: 20px;
+}
+
+.head-text {
+    color: white;
+    font-weight: 800;
+    margin-top: 0;
+}
+
+.url-info {
+    color: white;
+}
+
+.url-info p {
+    display: inline;
+    cursor: pointer;
 }
 
 .main-jobs {
@@ -25,6 +40,10 @@ body {
 
 .points h4 {
     cursor: pointer;
+}
+
+.filter-multiple:first-child h4 {
+    margin-top: 0;
 }
 
 .jobs-card > div{
