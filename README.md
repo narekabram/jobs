@@ -1,5 +1,3 @@
-# `angular-seed` — the seed for AngularJS apps
-
 This project is an application skeleton for a typical [AngularJS][angularjs] web app. You can use it
 to quickly bootstrap your angular webapp projects and dev environment for these projects.
 
@@ -11,7 +9,7 @@ The seed app doesn't do much, just shows how to wire two controllers and views t
 
 ## Getting Started
 
-To get you started you can simply clone the `angular-seed` repository and install the dependencies:
+To get you started you can simply clone the `jobs` repository and install the dependencies:
 
 ### Prerequisites
 
