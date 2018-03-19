@@ -132,12 +132,24 @@ angular.module('myApp')
                 }
 
                 if (this.filterAuth(fiObj)) {
-                    Object.keys(fiObj).forEach((filterType) => {
-                        if (fiObj[filterType] && fiObj[filterType].name) {
-                            this.filtered = this.filtered.filter(function (job) {
-                                console.log(job);
-                                console.log(filterType);
-                                if (typeof fiObj[filterType].name === 'string') {
+                    let typesArr = [];
+                    let filtered = this.filtered;
+                    Object.keys(fiObj).forEach(function (filterType) {
+                        if (fiObj[filterType].name.length) {
+                            filtered = filtered.filter(function (job) {
+                                if (fiObj[filterType].name.constructor.name === 'Array') {
+                                    typesArr = fiObj[filterType].name.filter(function (obj) {
+                                        if ((job[filterType].includes(obj.name))) {
+                                            return job;
+                                        }
+                                    });
+
+                                    if (typesArr.length) {
+                                        return filtered.concat(typesArr);
+
+                                    }
+
+                                } else if (fiObj[filterType].name.constructor.name === 'String') {
                                     if ((job[filterType].includes(fiObj[filterType].name))) {
                                         return job;
                                     }
@@ -146,12 +158,10 @@ angular.module('myApp')
                         }
                     });
 
-                    // return this.filtered;
-                    return this.calculateData(this.filtered);
+                    return this.calculateData(filtered);
                 }
 
                 return this.calculateData(jobs);
-                // return jobs;
             },
 
             getCategories: function () {
@@ -168,7 +178,7 @@ angular.module('myApp')
 
             calculateData: function (jobs) {
                 if (jobs.length > 5) {
-                    return {data: jobs.slice(0,5), total: jobs.length};
+                    return {data: jobs.slice(0, 5), total: jobs.length};
                 } else {
                     return {data: jobs, total: jobs.length};
                 }

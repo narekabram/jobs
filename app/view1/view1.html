@@ -1,7 +1,7 @@
 <div class="jobs">
     <header>
         <div class="container">
-            <h2 class="head-text">Our Vacancies</h2>
+            <h2 class="head-text">Vacancies</h2>
         </div>
         <span class="settings">
             <i data-toggle="collapse" data-target="#colors" aria-expanded="false" class="fa fa-cog  fa-2x" aria-hidden="true"></i>
@@ -17,7 +17,7 @@
         <form novalidate class="simple-form" ng-submit="View1Ctrl.search()">
             <div class="search-bar">
                 <span class="category col-md-3">
-                    <select class="form-control" ng-model="View1Ctrl.filter.category.name">
+                    <select class="form-control" ng-model="View1Ctrl.filter.category.name[0].name">
                         <option value="" selected>Category</option>
                         <option ng-repeat="category in View1Ctrl.categories track by category.name"
                                 value="{{category.name}}"
@@ -25,7 +25,7 @@
                     </select>
                 </span>
                 <span class="location col-md-3">
-                    <select class="form-control" ng-model="View1Ctrl.filter.location.name">
+                    <select class="form-control" ng-model="View1Ctrl.filter.location.name[0].name">
                         <option value="" selected>Location</option>
                         <option ng-repeat="location in View1Ctrl.locations track by location.name"
                                 value="{{location.name}}"
@@ -33,7 +33,7 @@
                     </select>
                 </span>
                 <span class="col-md-6 form-group input-group input-group-md search">
-                    <input type="text" class="form-control" ng-model="View1Ctrl.filter.title.name"
+                    <input type="text" class="form-control" ng-model="View1Ctrl.filter.title.name[0].name"
                            placeholder="Type your key word">
                     <span class="input-group-btn">
                         <button ng-mouseover="hover=true"
@@ -56,7 +56,7 @@
                             <li ng-repeat="category in View1Ctrl.categories track by $index">
                                 <label><input type="checkbox"
                                               ng-model="category.isChecked"
-                                              ng-checked="category.name === View1Ctrl.filter.category.name ? true : false"
+                                              ng-checked="category.name === View1Ctrl.filter.category.name[0].name ? true : false"
                                               ng-change="View1Ctrl.filterJobs(category, 'category')" value="">{{category.name}}</label>
                             </li>
                         </ul>
@@ -69,7 +69,7 @@
                             <li ng-repeat="emplTypes in View1Ctrl.emplTypes track by $index">
                                 <label><input type="checkbox"
                                               ng-model="emplTypes.isChecked" value=""
-                                              ng-checked="emplTypes.name === View1Ctrl.filter.emplTypes.name ? true : false"
+                                              ng-checked="emplTypes.name === View1Ctrl.filter.emplTypes.name[0].name ? true : false"
                                               ng-change="View1Ctrl.filterJobs(emplTypes, 'employmentType')" value="">{{emplTypes.name}}</label>
                             </li>
                         </ul>
@@ -82,7 +82,7 @@
                             <li ng-repeat="location in View1Ctrl.locations track by $index">
                                 <label><input type="checkbox"
                                               ng-model="location.isChecked" value=""
-                                              ng-checked="location.name === View1Ctrl.filter.location.name ? true : false"
+                                              ng-checked="location.name === View1Ctrl.filter.location.name[0].name ? true : false"
                                               ng-change="View1Ctrl.filterJobs(location, 'location')" value="">{{location.name}}</label>
                             </li>
                         </ul>

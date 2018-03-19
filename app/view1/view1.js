@@ -15,16 +15,16 @@ angular.module('myApp')
         var vm = this;
         vm.filter = {
             location: {
-                name: null
+                name: []
             },
             category: {
-                name: null
+                name: []
             },
             title: {
-                name: null
+                name: []
             },
             employmentType: {
-                name: null
+                name: []
             }
         };
 
@@ -45,7 +45,6 @@ angular.module('myApp')
         };
 
         vm.search = function () {
-            console.log(vm.filter);
             vm.jobs = Data.filter(vm.filter).data;
             vm.total = Data.filter(vm.filter).total;
             Data.filtered = [];
@@ -53,8 +52,14 @@ angular.module('myApp')
 
         vm.filterJobs = function (obj, type) {
             if (obj.isChecked) {
-                vm.filter[type] = obj;
-                vm.search();
+                vm.filter[type].name.push(obj);
+            } else {
+                vm.filter[type].name.forEach(function (obj, index) {
+                    if(obj.isChecked === false) {
+                        vm.filter[type].name.splice(index, 1);
+                    }
+                })
             }
+            vm.search();
         }
     });
